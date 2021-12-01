@@ -18,4 +18,6 @@ rake
 
 ## Days
 
-### Day 1
+### Day 1 - Done. I learned about `each cons`, a handy ruby Enumerable method for things like sliding windows.
+
+### Day 2 - 
