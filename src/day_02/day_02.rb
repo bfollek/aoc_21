@@ -1,3 +1,6 @@
+require_relative "./move"
+require_relative "./position"
+
 class Day02
   def part_1(file_name)
     pos = Position.new
