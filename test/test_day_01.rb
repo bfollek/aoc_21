@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require_relative "../src/day_01/day_01"
+require_relative "../src/day_01"
 
 class Day01Test < Minitest::Test
   def test_part_1
