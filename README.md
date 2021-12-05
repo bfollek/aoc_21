@@ -27,4 +27,8 @@ Several Enumerable methods:
 * `each_cons` - cons == consecutive. Handy for things like sliding windows;
 * `filter_map` - filter and map in one go. I didn't use this, but good to know about. 
 
-### Day 2 - 
+### Day 2 - part 1 done.
+
+#### Remember
+
+* Regexp - How to build it from a string, so that you can substitute constants.
