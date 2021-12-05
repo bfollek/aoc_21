@@ -1,8 +1,4 @@
 class Position
-  FORWARD = "forward"
-  UP = "up"
-  DOWN = "down"
-
   attr_reader :depth, :horizontal
 
   def initialize
@@ -12,11 +8,11 @@ class Position
 
   def change(move)
     case move.direction
-    when FORWARD
+    when Move::FORWARD
       @horizontal += move.distance
-    when UP
+    when Move::UP
       @depth -= move.distance
-    when DOWN
+    when Move::DOWN
       @depth += move.distance
     end
   end
