@@ -11,9 +11,7 @@ class Move
   end
 
   def self.load_file(file_name)
-    # e.g., "forward 7", "up 3", "down 22"
-    re = Regexp.new("(#{FORWARD}|#{UP}|#{DOWN}) " +
-                    '(\d+)') # Single quotes, so no need to escape backslash
+    re = /(#{FORWARD}|#{UP}|#{DOWN}) (\d)+/
     moves = []
     lines = File.readlines(file_name, chomp: true)
     lines.each do |line|
