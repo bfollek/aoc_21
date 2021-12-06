@@ -14,10 +14,9 @@ class CommonBits
       end
     end
     counters.each do |cnt|
-      @most_common << (cnt >= (diagnostics.size / 2) ? "1" : "0")
-    end
-    @most_common.each do |mc|
-      @least_common << (mc == "1" ? "0" : "1")
+      m, l = (cnt >= (diagnostics.size / 2)) ? ["1", "0"] : ["0", "1"]
+      @most_common << m
+      @least_common << l
     end
   end
 end
