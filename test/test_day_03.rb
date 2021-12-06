@@ -7,7 +7,7 @@ class Day03Test < Minitest::Test
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_03.txt")
     day_03 = Day03.new
-    assert_equal -1, day_03.part_1(file_name)
+    assert_equal 2640986, day_03.part_1(file_name)
   end
 
   def test_part_2
