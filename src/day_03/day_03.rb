@@ -5,9 +5,9 @@ class Day03
     diagnostics = File.readlines(file_name, chomp: true)
     cb = CommonBits.new
     cb.count(diagnostics)
-    gamma_rate = from_binary(cb.most_common)
-    epsilon_rate = from_binary(cb.least_common)
-    gamma_rate * epsilon_rate
+    gamma = from_binary(cb.most_common)
+    epsilon = from_binary(cb.least_common)
+    gamma * epsilon
   end
 
   def part_2(file_name)
