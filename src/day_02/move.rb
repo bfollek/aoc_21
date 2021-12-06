@@ -19,7 +19,7 @@ class Move
       if m
         moves << self.new(m[1], m[2].to_i)
       else
-        raise "Unknown move: #{line}"
+        raise StandardError, "Unknown move: #{line}"
       end
     end
     moves

@@ -21,7 +21,7 @@ class Day02Test < Minitest::Test
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_02_unknown_move.txt")
     day_02 = Day02.new
-    ex = assert_raises(RuntimeError) do
+    ex = assert_raises(StandardError) do
       assert_equal -1, day_02.part_2(file_name)
     end
     assert_match(/unknown move/i, ex.message)
