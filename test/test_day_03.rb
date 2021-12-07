@@ -11,6 +11,7 @@ class Day03Test < Minitest::Test
   end
 
   def test_part_2
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_03.txt")
     day_03 = Day03.new
