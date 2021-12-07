@@ -4,8 +4,8 @@ class Day03
   def part_1(file_name)
     diagnostics = File.readlines(file_name, chomp: true)
     most_common, least_common = CommonBits.count(diagnostics)
-    gamma = from_binary(most_common)
-    epsilon = from_binary(least_common)
+    gamma = string_array_to_binary(most_common)
+    epsilon = string_array_to_binary(least_common)
     gamma * epsilon
   end
 
@@ -13,29 +13,26 @@ class Day03
     diagnostics = File.readlines(file_name, chomp: true)
     oxy = filtered_rating(diagnostics, true)
     co2 = filtered_rating(diagnostics, false)
-    oxy * co2
+    oxy.to_i(2) * co2.to_i(2)
   end
 
   # -----------------------------------------------------------------
   private
 
   def filtered_rating(diagnostics, use_most_common)
-    while diagnostics.size > 1
+    (0...diagnostics[0].size).each do |i|
+      if diagnostics.size <= 1
+        break
+      end
       most_common, least_common = CommonBits.count(diagnostics)
       filter_bits = use_most_common ? most_common : least_common
-      filter_bits.each_with_index do |fb, i|
-        puts "diagnostics.size: #{diagnostics.size}"
-        diagnostics = diagnostics.filter { |d| d[i] == fb }
-        if diagnostics.size <= 1
-          break
-        end
-      end
+      diagnostics = diagnostics.filter { |d| d[i] == filter_bits[i] }
     end
     diagnostics[0]
   end
 
   # `a` is an array of binary digits as strings, e.g. ["1", "0", "1", "1", "0"]
-  def from_binary(a)
+  def string_array_to_binary(a)
     a.join.to_i(2)
   end
 end
