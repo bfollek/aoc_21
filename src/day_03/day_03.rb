@@ -19,23 +19,18 @@ class Day03
   # -----------------------------------------------------------------
   private
 
-  def filtered_rating(diagnostics, most_common)
-    cb = CommonBits.new
-
-    cb.count(diagnostics)
-    filter_bits = most_common ? cb.most_common : cb.least_common
-    filter_bits.each_with_index do |fb, i|
-      puts "diagnostics.size: #{diagnostics.size}"
-      diagnostics = diagnostics.filter { |d| d[i] == fb }
-      if diagnostics.size < 5
-        puts "diagnostics: #{diagnostics}"
-        puts "filter bit: #{fb}"
-      end
-      if diagnostics.size <= 1
-        break
+  def filtered_rating(diagnostics, use_most_common)
+    while diagnostics.size > 1
+      most_common, least_common = CommonBits.count(diagnostics)
+      filter_bits = use_most_common ? most_common : least_common
+      filter_bits.each_with_index do |fb, i|
+        puts "diagnostics.size: #{diagnostics.size}"
+        diagnostics = diagnostics.filter { |d| d[i] == fb }
+        if diagnostics.size <= 1
+          break
+        end
       end
     end
-    puts "diagnostics: #{diagnostics}"
     diagnostics[0]
   end
 
