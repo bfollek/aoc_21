@@ -4,6 +4,7 @@ require_relative "../src/day_04/day_04"
 
 class Day04Test < Minitest::Test
   def test_part_1_short
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_04_short.txt")
     day_04 = Day04.new
@@ -11,6 +12,7 @@ class Day04Test < Minitest::Test
   end
 
   def test_part_1
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_04.txt")
     day_04 = Day04.new
@@ -18,6 +20,7 @@ class Day04Test < Minitest::Test
   end
 
   def test_part_2_short
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_04_short.txt")
     day_04 = Day04.new
@@ -25,6 +28,7 @@ class Day04Test < Minitest::Test
   end
 
   def test_part_2_short
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_04.txt")
     day_04 = Day04.new
