@@ -1,7 +1,7 @@
-MOST_COMMON = 1
-LEAST_COMMON = 0
-
 class Day03
+  MOST_COMMON = 1
+  LEAST_COMMON = 0
+
   def part_1(file_name)
     diagnostics = File.readlines(file_name, chomp: true)
     most_common, least_common = count_common_bits(diagnostics)
@@ -22,13 +22,11 @@ class Day03
 
   def count_common_bits(diagnostics)
     counters = [0] * diagnostics[0].size
-
     diagnostics.each do |d|
       d.each_char.with_index do |c, i|
         counters[i] += c.to_i
       end
     end
-
     most_common = []
     least_common = []
     counters.each do |cnt|
