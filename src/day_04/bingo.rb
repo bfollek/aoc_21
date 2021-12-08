@@ -1,5 +1,8 @@
+require_relative "./board"
+
 class Bingo
-  LINES_PER_BOARD = 5
+  attr_reader :numbers
+  attr_accessor :boards
 
   def initialize(numbers, board_lines)
     @numbers = numbers
@@ -17,9 +20,18 @@ class Bingo
   private
 
   def board_lines_to_boards(lines)
-    if lines.size % LINES_PER_BOARD != 0
+    if lines.size % Board::BOARD_LINES != 0
       raise ArgumentError, "Wrong number of board lines: #{lines.size}"
     end
-    lines
+    # `lines` is an array of strings, e.g. ["22 13 17 11  0",...," 2  0 12  3  7"]
+    # Slice the `lines` into board-sized subarrays. Each subarray has the strings
+    # for one board.
+    slices = lines.each_slice(Board::BOARD_LINES).to_a
+    # Convert each subarray into a board.
+    boards = []
+    slices.each do |subarray|
+      boards << Board.new(subarray)
+    end
+    boards
   end
 end
