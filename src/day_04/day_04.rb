@@ -8,6 +8,7 @@ class Day04
 
   def part_2(file_name)
     game = Bingo.load_file(file_name)
+    game.play_to_lose
   end
 
   # -----------------------------------------------------------------

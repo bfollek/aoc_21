@@ -26,6 +26,10 @@ class Bingo
     raise StandardError, "No winner! Sad."
   end
 
+  # Find the board that comes in last, not first.
+  def play_to_lose
+  end
+
   # -----------------------------------------------------------------
   private
 
