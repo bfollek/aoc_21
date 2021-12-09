@@ -15,7 +15,7 @@ class Day04
 end
 
 # byebug day_04.rb
-dir = File.dirname(__FILE__)
-file_name = File.join(dir, "../../data/day_04_short.txt")
-day_04 = Day04.new
-puts day_04.part_1(file_name)
+# dir = File.dirname(__FILE__)
+# file_name = File.join(dir, "../../data/day_04_short.txt")
+# day_04 = Day04.new
+# puts day_04.part_1(file_name)
