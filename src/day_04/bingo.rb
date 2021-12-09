@@ -1,9 +1,6 @@
 require_relative "./board"
 
 class Bingo
-  attr_reader :numbers
-  attr_accessor :boards
-
   def initialize(numbers, board_lines)
     @numbers = numbers
     @boards = board_lines_to_boards(board_lines)
@@ -14,6 +11,19 @@ class Bingo
     numbers = game[0].split(",")
     board_lines = game[(2..)] # Skip the `numbers` line and the blank line following it.
     self.new numbers, board_lines.filter { |bl| !bl.empty? }  # Remove blank lines.
+  end
+
+  def play
+    @numbers.each do |n|
+      @boards.each do |b|
+        next unless b.numbers.include?(n)
+        winner, score = b.hit_number(n)
+        if winner
+          return score
+        end
+      end
+    end
+    raise StandardError, "No winner! Sad."
   end
 
   # -----------------------------------------------------------------
