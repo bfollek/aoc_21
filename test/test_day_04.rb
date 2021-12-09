@@ -18,15 +18,13 @@ class Day04Test < Minitest::Test
   end
 
   def test_part_2_short
-    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_04_short.txt")
     day_04 = Day04.new
-    assert_equal -1, day_04.part_2(file_name)
+    assert_equal 1924, day_04.part_2(file_name)
   end
 
   def test_part_2
-    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, "../data/day_04.txt")
     day_04 = Day04.new
