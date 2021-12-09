@@ -4,7 +4,7 @@ class Board
   BOARD_LINES = 5
   BOARD_COLS = BOARD_LINES # Boards are square.
 
-  attr_reader :numbers
+  attr_reader :numbers, :rows
 
   def initialize(array_of_strings)
     # Input example: ["22 13 17 11  0",...," 2  0 12  3  7"]
@@ -47,18 +47,23 @@ class Board
   # the board is a winner.
   def winner?(row, col_index)
     # Check the row
+    row_wins = true
     row.each do |h|
       if h.values[0] == false # Each hash has just one item.
-        return false
+        row_wins = false
+        break
       end
     end
+    return true if row_wins
     # Check the column
+    col_wins = true
     @rows.each do |r|
       if r[col_index].values[0] == false # Each hash has just one item.
-        return false
+        col_wins = false
+        break
       end
     end
-    true
+    col_wins
   end
 
   # "The score of the winning board can now be calculated. Start by finding
