@@ -1,3 +1,5 @@
+require "set"
+
 class Board
   BOARD_LINES = 5
   BOARD_COLS = BOARD_LINES # Boards are square.
@@ -28,7 +30,7 @@ class Board
         key = r[i].keys[0] # Each hash has just one item.
         if key == n
           r[i][key] = true
-          if winner?
+          if winner?(r, i)
             return [true, score(n)]
           else
             return [false, nil]
@@ -41,12 +43,19 @@ class Board
   # -----------------------------------------------------------------
   private
 
-  def winner?
+  # We know which row and column we changed. If either is all true,
+  # the board is a winner.
+  def winner?(row, col_index)
+    # Check the row
+    row.each do |h|
+      if h.values[0] == false # Each hash has just one item.
+        return false
+      end
+    end
+    # Check the column
     @rows.each do |r|
-      (0...BOARD_COLS).each do |i|
-        if r[i].values[0] == false # Each hash has just one item.
-          return false
-        end
+      if r[col_index].values[0] == false # Each hash has just one item.
+        return false
       end
     end
     true
@@ -65,6 +74,7 @@ class Board
         end
       end
     end
+    puts "#{unmarked} #{n}"
     unmarked * n.to_i
   end
 end
