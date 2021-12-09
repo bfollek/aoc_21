@@ -8,12 +8,12 @@ class Bingo
 
   def self.load_file(file_name)
     game = File.readlines(file_name, chomp: true)
-    numbers = game[0].split(",")
+    numbers = game[0].split(",").map &:to_i
     board_lines = game[(2..)] # Skip the `numbers` line and the blank line following it.
     self.new numbers, board_lines.filter { |bl| !bl.empty? }  # Remove blank lines.
   end
 
-  def play
+  def play_to_win
     @numbers.each do |n|
       @boards.each do |b|
         next unless b.numbers.include?(n)
@@ -34,12 +34,18 @@ class Bingo
       raise ArgumentError, "Wrong number of board lines: #{lines.size}"
     end
     # `lines` is an array of strings, e.g. ["22 13 17 11  0",...," 2  0 12  3  7"]
-    # Slice the `lines` into board-sized subarrays. Each subarray has the strings
+    # Convert it to an array of arrays of ints: [ [22, 13, 17, 11, 0],...]
+    int_lines = []
+    lines.each do |line|
+      int_lines << (line.split.map &:to_i)
+    end
+    # Slice `int_lines` into board-sized subarrays. Each subarray has the numbers
     # for one board.
-    slices = lines.each_slice(Board::BOARD_LINES).to_a
+    slices = int_lines.each_slice(Board::BOARD_LINES).to_a
     # Convert each subarray into a board.
     boards = []
     slices.each do |subarray|
+      #a = subarray.each { |sa| sa.split.map &:to_i }
       boards << Board.new(subarray)
     end
     boards

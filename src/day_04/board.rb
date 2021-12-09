@@ -6,17 +6,16 @@ class Board
 
   attr_reader :numbers, :rows
 
-  def initialize(array_of_strings)
-    # Input example: ["22 13 17 11  0",...," 2  0 12  3  7"]
-    # Each input string defines a row in the board. Convert it to
-    # an array of hashes, e.g. "22 13 17 11  0" becomes
-    # ["22" => false, "13" => false...] We use the booleans to track hits.
+  def initialize(array_of_int_arrays)
+    # Input example: [[22 13 17 11  0],...,[] 2  0 12  3  7]]
+    # Each subarray defines a row in the board. Convert it to
+    # an array of hashes, e.g. [22 13 17 11  0] becomes
+    # [22 => false, 13 => false...] We use the booleans to track hits.
     #
     # Also, build a set of all the numbers on the board, for quick lookups.
     @numbers = Set[]
     @rows = []
-    array_of_strings.each do |s|
-      a = s.split
+    array_of_int_arrays.each do |a|
       @numbers += a
       a_hash = a.map { |e| { e => false } }
       @rows << a_hash
@@ -75,10 +74,10 @@ class Board
     @rows.each do |r|
       (0...BOARD_COLS).each do |i|
         if r[i].values[0] == false # Each hash has just one item.
-          unmarked += r[i].keys[0].to_i
+          unmarked += r[i].keys[0]
         end
       end
     end
-    unmarked * n.to_i
+    unmarked * n
   end
 end
