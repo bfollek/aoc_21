@@ -34,15 +34,11 @@ class Bingo
       raise ArgumentError, "Wrong number of board lines: #{lines.size}"
     end
     # `lines` is an array of strings, e.g. ["22 13 17 11  0",...," 2  0 12  3  7"]
-    # Convert it to an array of arrays of ints: [ [22, 13, 17, 11, 0],...]
-    int_lines = []
-    lines.each { |line| int_lines << (line.split.map &:to_i) }
-    # Slice `int_lines` into board-sized subarrays. Each subarray has the numbers
-    # for one board.
+    # Convert it to `int_lines`, an array of int arrays: [ [22, 13, 17, 11, 0],...]
+    int_lines = lines.map { |line| line.split.map &:to_i }
+    # Slice `int_lines` into board-sized subarrays. Each
+    # subarray has the numbers for one board.
     slices = int_lines.each_slice(Board::BOARD_LINES)
-    # Convert each subarray into a board.
-    boards = []
-    slices.each { |subarray| boards << Board.new(subarray) }
-    boards
+    slices.map { |subarray| Board.new(subarray) }
   end
 end
