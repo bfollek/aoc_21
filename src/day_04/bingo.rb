@@ -36,18 +36,13 @@ class Bingo
     # `lines` is an array of strings, e.g. ["22 13 17 11  0",...," 2  0 12  3  7"]
     # Convert it to an array of arrays of ints: [ [22, 13, 17, 11, 0],...]
     int_lines = []
-    lines.each do |line|
-      int_lines << (line.split.map &:to_i)
-    end
+    lines.each { |line| int_lines << (line.split.map &:to_i) }
     # Slice `int_lines` into board-sized subarrays. Each subarray has the numbers
     # for one board.
-    slices = int_lines.each_slice(Board::BOARD_LINES).to_a
+    slices = int_lines.each_slice(Board::BOARD_LINES)
     # Convert each subarray into a board.
     boards = []
-    slices.each do |subarray|
-      #a = subarray.each { |sa| sa.split.map &:to_i }
-      boards << Board.new(subarray)
-    end
+    slices.each { |subarray| boards << Board.new(subarray) }
     boards
   end
 end
