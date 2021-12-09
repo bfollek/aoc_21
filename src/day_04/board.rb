@@ -79,7 +79,6 @@ class Board
         end
       end
     end
-    #puts "#{unmarked} #{n}"
     unmarked * n.to_i
   end
 end
