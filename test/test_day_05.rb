@@ -1,10 +1,10 @@
 require "minitest/autorun"
 
-require_relative "../src/day_05/day_05"
+DAY = "05"
+
+require_relative "../src/day_#{DAY}/day_#{DAY}"
 
 class Day05Test < Minitest::Test
-  DAY = "05"
-
   SHORT_FILE = "../data/day_#{DAY}_short.txt"
   LONG_FILE = "../data/day_#{DAY}.txt"
 
