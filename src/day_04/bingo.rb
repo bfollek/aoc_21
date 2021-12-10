@@ -1,3 +1,4 @@
+require "set"
 require_relative "./board"
 
 class Bingo
@@ -28,14 +29,15 @@ class Bingo
 
   # Find the board that comes in last, not first.
   def play_to_lose
-    winner_cnt = 0
+    winners = Set[]
     @numbers.each do |n|
       @boards.each do |b|
-        next unless b.numbers.include?(n)
+        next if winners.include? b.object_id # Skip board that's already a winner.
+        next unless b.numbers.include? n
         winner, score = b.hit_number(n)
         if winner
-          winner_cnt += 1
-          if winner_cnt == @boards.size
+          winners << b.object_id
+          if winners.size == @boards.size
             return score
           end
         end
