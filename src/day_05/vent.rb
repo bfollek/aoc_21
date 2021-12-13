@@ -21,10 +21,12 @@ class Vent
 
   def points
     if x_start == x_end
-      ys = y_start <= y_end ? (y_start..y_end) : (y_end..y_start)
+      steppe = y_start <= y_end ? 1 : -1
+      ys = (y_start..y_end).step(steppe)
       ys.map { |y| [x_start, y] }
     elsif y_start == y_end
-      xs = x_start <= x_end ? (x_start..x_end) : (x_end..x_start)
+      steppe = x_start <= x_end ? 1 : -1
+      xs = (x_start..x_end).step(steppe)
       xs.map { |x| [x, y_start] }
     else # diagonal
       xs = x_start <= x_end ? (x_start..x_end) : (x_end..x_start)
