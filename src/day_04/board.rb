@@ -18,15 +18,13 @@ class Board
 
   # Assume a number appears only once on a board.
   def mark_number(n)
-    @data.each_index do |i|
-      @data[0].each_index do |j|
-        if @data[i][j] == n
-          @marked[i][j] = true
-          if winner?(i, j)
-            return [true, score(n)]
-          else
-            return [false, nil]
-          end
+    data_indexes do |i, j|
+      if @data[i][j] == n
+        @marked[i][j] = true
+        if winner?(i, j)
+          return [true, score(n)]
+        else
+          return [false, nil]
         end
       end
     end
@@ -55,13 +53,19 @@ class Board
   # 24, to get the final score, 188 * 24 = 4512."
   def score(n)
     unmarked = 0
-    @data.each_index do |i|
-      @data[0].each_index do |j|
-        if @marked[i][j] == false
-          unmarked += @data[i][j]
-        end
+    data_indexes do |i, j|
+      if @marked[i][j] == false
+        unmarked += @data[i][j]
       end
     end
     unmarked * n
+  end
+
+  def data_indexes
+    @data.each_index do |i|
+      @data[0].each_index do |j|
+        yield i, j
+      end
+    end
   end
 end
