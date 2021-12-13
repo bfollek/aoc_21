@@ -13,7 +13,13 @@ class Day05
   end
 
   def part_2(file_name)
-    -1
+    h = Hash.new(0)
+    lines = File.readlines(file_name, chomp: true)
+    lines.each do |line|
+      v = Vent.new line
+      v.points.each { |p| h[p] += 1 }
+    end
+    h.values.filter { |e| e > 1 }.size
   end
 
   # -----------------------------------------------------------------

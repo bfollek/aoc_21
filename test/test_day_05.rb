@@ -29,7 +29,7 @@ class Day05Test < Minitest::Test
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, SHORT_FILE)
     day = CLASS.new
-    assert_equal -1, day.part_2(file_name)
+    assert_equal 12, day.part_2(file_name)
   end
 
   def test_part_2
