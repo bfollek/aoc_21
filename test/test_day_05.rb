@@ -14,17 +14,18 @@ class Day05Test < Minitest::Test
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, SHORT_FILE)
     day = CLASS.new
-    assert_equal -1, day.part_1(file_name)
+    assert_equal 5, day.part_1(file_name)
   end
 
   def test_part_1
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, LONG_FILE)
     day = CLASS.new
-    assert_equal -1, day.part_1(file_name)
+    assert_equal 5632, day.part_1(file_name)
   end
 
   def test_part_2_short
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, SHORT_FILE)
     day = CLASS.new
@@ -32,6 +33,7 @@ class Day05Test < Minitest::Test
   end
 
   def test_part_2
+    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, LONG_FILE)
     day = CLASS.new
