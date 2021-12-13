@@ -1,5 +1,12 @@
 class Day05
   def part_1(file_name)
+    points = Hash.new(0)
+    lines = File.readlines(file_name, chomp: true)
+    lines.each do |line|
+      v = Vent.new line
+      next if v.diagonal?
+      puts line
+    end
     -1
   end
 
@@ -9,4 +16,7 @@ class Day05
 
   # -----------------------------------------------------------------
   private
+
+  def diagonal?(line)
+  end
 end
