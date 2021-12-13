@@ -34,7 +34,7 @@ class Bingo
       @boards.each do |b|
         next if winners.include? b.object_id # Skip board that's already a winner.
         next unless b.numbers.include? n
-        winner, score = b.hit_number(n)
+        winner, score = b.mark_number(n)
         if winner
           winners << b.object_id
           if winners.size == @boards.size
