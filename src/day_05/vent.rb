@@ -29,8 +29,10 @@ class Vent
       xs = (x_start..x_end).step(steppe)
       xs.map { |x| [x, y_start] }
     else # diagonal
-      xs = x_start <= x_end ? (x_start..x_end) : (x_end..x_start)
-      ys = y_start <= y_end ? (y_start..y_end) : (y_end..y_start)
+      x_steppe = x_start <= x_end ? 1 : -1
+      y_steppe = y_start <= y_end ? 1 : -1
+      xs = (x_start..x_end).step(x_steppe)
+      ys = (y_start..y_end).step(y_steppe)
       xs.zip(ys)
     end
   end

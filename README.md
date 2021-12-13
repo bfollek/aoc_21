@@ -27,8 +27,24 @@ Several Enumerable methods:
 * `each_cons` - cons == consecutive. Handy for things like sliding windows;
 * `filter_map` - filter and map in one go. I didn't use this, but good to know about. 
 
-### Day 2 - part 1 done.
+### Day 2 - Done.
 
 #### Remember
 
 * Regexp - How to build it from a string, so that you can substitute constants.
+
+### Day 3 - Done.
+
+### Day 4 - Done.
+
+#### Remember
+
+* Keeping two 2D arrays in sync as a clean way to handle game board state.
+* DRYing up code with a method that takes a block.
+
+### Day 5 - Done.
+
+#### Remember
+
+* Using a hash where a 2D array might seem obvious, but would kill performance.
+* Fun with ranges and the `step` method.
