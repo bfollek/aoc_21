@@ -37,25 +37,16 @@ class Board
 
   # We know which row and column we changed. If either is all true,
   # the board is a winner.
-  def winner?(row, col)
-    # Check the row
-    row_wins = true
-    @data[row].each_index do |i|
-      if @marked[row][i] == false
-        row_wins = false
-        break
-      end
-    end
-    return true if row_wins
-    # Check the column
-    col_wins = true
-    @data.each_index do |i|
-      if @marked[i][col] == false #
-        col_wins = false
-        break
-      end
-    end
-    col_wins
+  def winner?(row_index, col_index)
+    # To check the row, check if it's all marked true.
+    is_row_winner = @marked[row_index].all? { |e| e }
+    return true if is_row_winner
+
+    # To check the column, get the column values into an array.
+    # We don't need to rotate the whole @marked array,
+    # so `transpose` is overkill.
+    col = @marked.map { |e| e[col_index] }
+    col.all? { |e| e }
   end
 
   # "The score of the winning board can now be calculated. Start by finding
