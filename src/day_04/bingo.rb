@@ -18,7 +18,7 @@ class Bingo
     @numbers.each do |n|
       @boards.each do |b|
         next unless b.numbers.include?(n)
-        winner, score = b.hit_number(n)
+        winner, score = b.mark_number(n)
         if winner
           return score
         end

@@ -7,29 +7,22 @@ class Board
   attr_reader :numbers, :rows
 
   def initialize(array_of_int_arrays)
-    # Input example: [[22 13 17 11  0],...,[] 2  0 12  3  7]]
-    # Each subarray defines a row in the board. Convert it to
-    # an array of hashes, e.g. [22 13 17 11  0] becomes
-    # [22 => false, 13 => false...] We use the booleans to track hits.
-    #
-    # Also, build a set of all the numbers on the board, for quick lookups.
-    @numbers = Set[]
-    @rows = []
-    array_of_int_arrays.each do |a|
-      @numbers += a
-      a_hash = a.map { |e| { e => false } }
-      @rows << a_hash
-    end
+    # A 2D array of the numbers on the board.
+    @data = array_of_int_arrays
+    # A 2D array of booleans, one for each number on the board. true when the
+    # number in @data has been called. All false to start.
+    @marked = Array.new(@data.size) { Array.new(@data[0].size, false) }
+    # A set of all the numbers on the board, for quick lookups.
+    @numbers = @data.flatten.to_set
   end
 
   # Assume a number appears only once on a board.
-  def hit_number(n)
-    @rows.each do |r|
-      (0...BOARD_COLS).each do |i|
-        key = r[i].keys[0] # Each hash has just one item.
-        if key == n
-          r[i][key] = true
-          if winner?(r, i)
+  def mark_number(n)
+    @data.each_index do |i|
+      @data[0].each_index do |j|
+        if @data[i][j] == n
+          @marked[i][j] = true
+          if winner?(i, j)
             return [true, score(n)]
           else
             return [false, nil]
@@ -44,11 +37,11 @@ class Board
 
   # We know which row and column we changed. If either is all true,
   # the board is a winner.
-  def winner?(row, col_index)
+  def winner?(row, col)
     # Check the row
     row_wins = true
-    row.each do |h|
-      if h.values[0] == false # Each hash has just one item.
+    @data[row].each_index do |i|
+      if @marked[row][i] == false
         row_wins = false
         break
       end
@@ -56,8 +49,8 @@ class Board
     return true if row_wins
     # Check the column
     col_wins = true
-    @rows.each do |r|
-      if r[col_index].values[0] == false # Each hash has just one item.
+    @data.each_index do |i|
+      if @marked[i][col] == false #
         col_wins = false
         break
       end
@@ -71,10 +64,10 @@ class Board
   # 24, to get the final score, 188 * 24 = 4512."
   def score(n)
     unmarked = 0
-    @rows.each do |r|
-      (0...BOARD_COLS).each do |i|
-        if r[i].values[0] == false # Each hash has just one item.
-          unmarked += r[i].keys[0]
+    @data.each_index do |i|
+      @data[0].each_index do |j|
+        if @marked[i][j] == false
+          unmarked += @data[i][j]
         end
       end
     end
