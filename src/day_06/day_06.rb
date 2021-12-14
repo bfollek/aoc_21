@@ -7,11 +7,36 @@ class Day06
   end
 
   def part_2(file_name, days)
-    -1
+    population = File.read(file_name, chomp: true).split(",").map &:to_i
+    population_by_due_date = simulate_fast population, days
+    population_by_due_date.sum
   end
 
   # -----------------------------------------------------------------
   private
+
+  def simulate_fast(population, days)
+    # A fish can have a due date of 0 to 8 days.
+    # Count the number of fish with each due date.
+    population_by_due_date = [0] * 9
+    population.each do |fish|
+      population_by_due_date[fish] += 1
+    end
+    #debug "starting population_by_due_date: #{population_by_due_date}"
+    days.times do
+      tmp = population_by_due_date[0]
+      population_by_due_date[0] = population_by_due_date[1]
+      population_by_due_date[1] = population_by_due_date[2]
+      population_by_due_date[2] = population_by_due_date[3]
+      population_by_due_date[3] = population_by_due_date[4]
+      population_by_due_date[4] = population_by_due_date[5]
+      population_by_due_date[5] = population_by_due_date[6]
+      population_by_due_date[6] = population_by_due_date[7] + tmp
+      population_by_due_date[7] = population_by_due_date[8]
+      population_by_due_date[8] = tmp
+    end
+    population_by_due_date
+  end
 
   # "Each day, a 0 becomes a 6 and adds a new 8 to the end of the list, while each other number decreases by 1 if it was present at the start of the day."
   def simulate(population, days)
