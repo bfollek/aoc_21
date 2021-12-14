@@ -1,4 +1,6 @@
 class Day06
+  NUM_SLOTS = 9
+
   # "How many lanternfish would there be after 80 days?"
   def part_1(file_name, days)
     population = File.read(file_name, chomp: true).split(",").map &:to_i
@@ -18,22 +20,28 @@ class Day06
   def simulate_fast(population, days)
     # A fish can have a due date of 0 to 8 days.
     # Count the number of fish with each due date.
-    population_by_due_date = [0] * 9
+    population_by_due_date = [0] * NUM_SLOTS
     population.each do |fish|
       population_by_due_date[fish] += 1
     end
     #debug "starting population_by_due_date: #{population_by_due_date}"
     days.times do
       tmp = population_by_due_date[0]
-      population_by_due_date[0] = population_by_due_date[1]
-      population_by_due_date[1] = population_by_due_date[2]
-      population_by_due_date[2] = population_by_due_date[3]
-      population_by_due_date[3] = population_by_due_date[4]
-      population_by_due_date[4] = population_by_due_date[5]
-      population_by_due_date[5] = population_by_due_date[6]
-      population_by_due_date[6] = population_by_due_date[7] + tmp
-      population_by_due_date[7] = population_by_due_date[8]
-      population_by_due_date[8] = tmp
+      # Shift each slot down
+      (0..NUM_SLOTS - 2).each do |i|
+        population_by_due_date[i] = population_by_due_date[i + 1]
+      end
+      population_by_due_date[6] += tmp # Births
+      population_by_due_date[NUM_SLOTS - 1] = tmp
+      # population_by_due_date[0] = population_by_due_date[1]
+      # population_by_due_date[1] = population_by_due_date[2]
+      # population_by_due_date[2] = population_by_due_date[3]
+      # population_by_due_date[3] = population_by_due_date[4]
+      # population_by_due_date[4] = population_by_due_date[5]
+      # population_by_due_date[5] = population_by_due_date[6]
+      # population_by_due_date[6] = population_by_due_date[7] + tmp
+      # population_by_due_date[7] = population_by_due_date[8]
+      # population_by_due_date[8] = tmp
     end
     population_by_due_date
   end
