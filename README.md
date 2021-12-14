@@ -51,4 +51,8 @@ Several Enumerable methods:
 
 ### Day 6 - Done.
 
-I needed a hint from the subreddit for part 2.
+I needed an algorithm hint from the subreddit for part 2.
+
+#### Remember
+
+* If a method appends to an array, the reference doesn't change, and the caller will see the new element. But if a method concatenates arrays (+=), the reference changes, and the caller won't see it unless the method returns the array and the caller rebinds it.
