@@ -2,7 +2,7 @@ class Day06
   # "How many lanternfish would there be after 80 days?"
   def part_1(file_name, days)
     population = File.read(file_name, chomp: true).split(",").map &:to_i
-    population = simulate population, days
+    simulate population, days
     population.size
   end
 
@@ -13,7 +13,7 @@ class Day06
   # -----------------------------------------------------------------
   private
 
-  # Each day, a 0 becomes a 6 and adds a new 8 to the end of the list, while each other number decreases by # 1 if it was present at the start of the day.
+  # "Each day, a 0 becomes a 6 and adds a new 8 to the end of the list, while each other number decreases by 1 if it was present at the start of the day."
   def simulate(population, days)
     while days > 0
       #debug "#{days}: #{population}"
@@ -27,9 +27,12 @@ class Day06
           population[i] = fish - 1
         end
       end
-      population += new_fish
+      # Using += gets us a new array reference, and we have to return `population` explicitly.
+      # This seems more natural.
+      new_fish.each do |nf|
+        population << nf
+      end
     end
-    population
   end
 
   def debug(msg)
