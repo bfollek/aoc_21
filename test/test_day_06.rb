@@ -39,10 +39,9 @@ class Day06Test < Minitest::Test
   end
 
   def test_part_2
-    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, LONG_FILE)
     day = CLASS.new
-    assert_equal -1, day.part_2(file_name, 256)
+    assert_equal 1639643057051, day.part_2(file_name, 256)
   end
 end

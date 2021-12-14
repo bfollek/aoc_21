@@ -48,3 +48,7 @@ Several Enumerable methods:
 
 * Using a hash where a 2D array might seem obvious, but would kill performance.
 * Fun with ranges and the `step` method.
+
+### Day 6 - Done.
+
+I needed a hint from the subreddit for part 2.
