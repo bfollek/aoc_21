@@ -29,9 +29,7 @@ class Day06
       end
       # Using += gets us a new array reference, and we have to return `population` explicitly.
       # This seems more natural.
-      new_fish.each do |nf|
-        population << nf
-      end
+      new_fish.each { |nf| population << nf }
     end
   end
 
