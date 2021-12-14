@@ -15,9 +15,7 @@ class Day06
 
   # "Each day, a 0 becomes a 6 and adds a new 8 to the end of the list, while each other number decreases by 1 if it was present at the start of the day."
   def simulate(population, days)
-    while days > 0
-      #debug "#{days}: #{population}"
-      days -= 1
+    days.times do
       new_fish = []
       population.each_with_index do |fish, i|
         if fish == 0
