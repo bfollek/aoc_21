@@ -17,16 +17,16 @@ class Day06
   def simulate(population, days)
     days.times do
       new_fish = []
-      population.each_with_index do |fish, i|
-        if fish == 0
+      population.each_index do |i|
+        if population[i] == 0
           population[i] = 6
           new_fish << 8
         else
-          population[i] = fish - 1
+          population[i] -= 1
         end
       end
       # Using += gets us a new array reference, and we have to return `population` explicitly.
-      # This seems more natural.
+      # Appending seems more natural.
       new_fish.each { |nf| population << nf }
     end
   end
