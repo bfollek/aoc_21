@@ -25,7 +25,10 @@ class Day07
 
   def calc_fuel(pos, crabs)
     fuel = 0
-    crabs.each_pair { |crab_pos, num_crabs| fuel += (crab_pos - pos) * num_crabs }
+    crabs.each_pair do |crab_pos, num_crabs|
+      distance = (crab_pos - pos).abs
+      fuel += distance * num_crabs
+    end
     fuel
   end
 end
