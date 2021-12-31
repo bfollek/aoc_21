@@ -32,7 +32,6 @@ class Day07Test < Minitest::Test
   end
 
   def test_part_2
-    skip
     dir = File.dirname(__FILE__)
     file_name = File.join(dir, LONG_FILE)
     day = CLASS.new
