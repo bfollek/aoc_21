@@ -59,7 +59,15 @@ I needed an algorithm hint from the subreddit for part 2.
 
 ### Day 7 - Done.
 
-Straightforward. I started with a brute force approach. I thought part 2 might require caching the sums to get decent performance for the full file. But the brute force approach worked fine with no optimization.
+I benchmarked an easy optimization of the fuel calculation: break out of the loop through the crabs hash when we know the position we're testing isn't an improvement. It makes about a 50% difference:
+
+```
+                      user     system      total        real
+calc              0.293204   0.003312   0.296516 (  0.300539)
+calc_with_break   0.147859   0.001517   0.149376 (  0.151098)
+```
+
+Other than that, I used a straight ahead brute force approach. I thought part 2 might require caching the sums to get decent performance for the full file. But the brute force approach worked fine.
 
 #### Remember
 

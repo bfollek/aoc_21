@@ -7,6 +7,10 @@ class Day07
     calc(file_name) { |distance, num_crabs| (1..distance).sum * num_crabs }
   end
 
+  def part_2_with_break(file_name)
+    calc_with_break(file_name) { |distance, num_crabs| (1..distance).sum * num_crabs }
+  end
+
   # -----------------------------------------------------------------
   private
 
@@ -22,6 +26,30 @@ class Day07
       crabs.each_pair do |crab_pos, num_crabs|
         distance = (crab_pos - pos).abs
         fuel += yield distance, num_crabs
+      end
+      if lowest_fuel.nil? || lowest_fuel > fuel
+        lowest_fuel = fuel
+      end
+    end
+    lowest_fuel
+  end
+
+  def calc_with_break(file_name)
+    input = File.read(file_name, chomp: true).split(",").map &:to_i
+    crabs = Hash.new(0)
+    input.each { |i| crabs[i] += 1 }
+    min_pos = crabs.keys.min
+    max_pos = crabs.keys.max
+    lowest_fuel = nil
+    (min_pos..max_pos).each do |pos|
+      fuel = 0
+      crabs.each_pair do |crab_pos, num_crabs|
+        distance = (crab_pos - pos).abs
+        fuel += yield distance, num_crabs
+        # Break crabs hash loop when we know this isn't the answer.
+        if lowest_fuel.is_a?(Numeric) && fuel > lowest_fuel
+          break
+        end
       end
       if lowest_fuel.nil? || lowest_fuel > fuel
         lowest_fuel = fuel
