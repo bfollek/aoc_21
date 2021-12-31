@@ -56,3 +56,7 @@ I needed an algorithm hint from the subreddit for part 2.
 #### Remember
 
 * If a method appends to an array, the reference doesn't change, and the caller will see the new element. But if a method concatenates arrays (+=), the reference changes, and the caller won't see it unless the method returns the array and the caller rebinds it.
+
+### Day 7 - Done.
+
+Straightforward. I started with a brute force approach. I thought part 2 might require caching the sums to get decent performance for the full file. But the brute force approach worked fine with no optimization.
