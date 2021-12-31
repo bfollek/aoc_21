@@ -60,3 +60,7 @@ I needed an algorithm hint from the subreddit for part 2.
 ### Day 7 - Done.
 
 Straightforward. I started with a brute force approach. I thought part 2 might require caching the sums to get decent performance for the full file. But the brute force approach worked fine with no optimization.
+
+#### Remember
+
+* `downto` when you want to iterate from higher to lower, e.g. `16.downto(5).each {|i| puts i}`. (Though I didn't end up using this in the code.)
