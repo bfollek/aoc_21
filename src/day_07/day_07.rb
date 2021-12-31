@@ -7,7 +7,7 @@ class Day07
     max_pos = crabs.keys.max
     lowest_fuel = nil
     (min_pos..max_pos).each do |pos|
-      fuel = calc_fuel_part_1(pos, crabs)
+      fuel = calc_fuel(pos, crabs) { |distance, num_crabs| distance * num_crabs }
       if lowest_fuel.nil? || lowest_fuel > fuel
         lowest_fuel = fuel
       end
@@ -23,7 +23,7 @@ class Day07
     max_pos = crabs.keys.max
     lowest_fuel = nil
     (min_pos..max_pos).each do |pos|
-      fuel = calc_fuel_part_2(pos, crabs)
+      fuel = calc_fuel(pos, crabs) { |distance, num_crabs| (1..distance).sum * num_crabs }
       if lowest_fuel.nil? || lowest_fuel > fuel
         lowest_fuel = fuel
       end
@@ -34,20 +34,11 @@ class Day07
   # -----------------------------------------------------------------
   private
 
-  def calc_fuel_part_1(pos, crabs)
+  def calc_fuel(pos, crabs)
     fuel = 0
     crabs.each_pair do |crab_pos, num_crabs|
       distance = (crab_pos - pos).abs
-      fuel += distance * num_crabs
-    end
-    fuel
-  end
-
-  def calc_fuel_part_2(pos, crabs)
-    fuel = 0
-    crabs.each_pair do |crab_pos, num_crabs|
-      distance = (crab_pos - pos).abs
-      fuel += (1..distance).sum * num_crabs
+      fuel += yield distance, num_crabs
     end
     fuel
   end

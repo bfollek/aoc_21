@@ -63,4 +63,5 @@ Straightforward. I started with a brute force approach. I thought part 2 might r
 
 #### Remember
 
+* Another good example of `yield` and a block to DRY up code.
 * `downto` when you want to iterate from higher to lower, e.g. `16.downto(5).each {|i| puts i}`. (Though I didn't end up using this in the code.)
