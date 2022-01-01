@@ -1,15 +1,3 @@
-
-Advent of Code
-
-    [About][Events][Shop][Settings][Log Out]
-
-bfollek 14*
-      /^2021$/
-
-    [Calendar][AoC++][Sponsors][Leaderboard][Stats]
-
-Our sponsors help make Advent of Code possible:
-DRW - Low latency fintech. First and fastest! Hiring in: Montreal, Chicago, London
 --- Day 8: Seven Segment Search ---
 
 You barely reach the safety of the cave when the whale smashes into the cave mouth, collapsing it. Sensors indicate another exit to this cave at a much greater depth, so you have no choice but to press on.
@@ -81,9 +69,3 @@ fgae cfgab fg bagce
 Because the digits 1, 4, 7, and 8 each use a unique number of segments, you should be able to tell which combinations of signals correspond to those digits. Counting only digits in the output values (the part after | on each line), in the above example, there are 26 instances of digits that use a unique number of segments (highlighted above).
 
 In the output values, how many times do digits 1, 4, 7, or 8 appear?
-
-To begin, get your puzzle input.
-
-Answer:
-
-You can also [Shareon Twitter Mastodon] this puzzle.
