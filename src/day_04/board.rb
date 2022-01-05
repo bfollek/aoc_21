@@ -4,9 +4,11 @@ class Board
   BOARD_LINES = 5
   BOARD_COLS = BOARD_LINES # Boards are square.
 
-  attr_reader :numbers, :rows
+  attr_reader :data, :marked, :numbers
 
   def initialize(array_of_int_arrays)
+    puts "woo: #{array_of_int_arrays}\n"
+    #puts "array_of_int_arrays: #{array_of_int_arrays}"
     # A 2D array of the numbers on the board.
     @data = array_of_int_arrays
     # A 2D array of booleans, one for each number on the board. true when the
@@ -18,10 +20,12 @@ class Board
 
   # Assume a number appears only once on a board.
   def mark_number(n)
+    puts "in mark_number"
     data_indexes do |i, j|
       if @data[i][j] == n
         @marked[i][j] = true
         if winner?(i, j)
+          puts "winner: #{score(n)}"
           return [true, score(n)]
         else
           return [false, nil]
