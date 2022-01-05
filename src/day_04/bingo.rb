@@ -2,16 +2,12 @@ require "set"
 require_relative "./board"
 
 class Bingo
-  def initialize(numbers, board_lines)
-    @numbers = numbers
-    @boards = board_lines_to_boards(board_lines)
-  end
-
-  def self.load_file(file_name)
-    game = File.readlines(file_name, chomp: true)
-    numbers = game[0].split(",").map &:to_i
-    board_lines = game[(2..)] # Skip the `numbers` line and the blank line following it.
-    self.new numbers, board_lines.filter { |bl| !bl.empty? }  # Remove blank lines.
+  def initialize(file_name)
+    lines = File.readlines(file_name, chomp: true)
+    @numbers = lines[0].split(",").map &:to_i
+    # Skip the `numbers` line, and remove blank lines.
+    lines = lines[(1..)].filter { |bl| !bl.empty? }
+    @boards = lines_to_boards(lines)
   end
 
   def play_to_win
@@ -49,7 +45,7 @@ class Bingo
   # -----------------------------------------------------------------
   private
 
-  def board_lines_to_boards(lines)
+  def lines_to_boards(lines)
     if lines.size % Board::BOARD_LINES != 0
       raise ArgumentError, "Wrong number of board lines: #{lines.size}"
     end
