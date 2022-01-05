@@ -4,8 +4,8 @@ require_relative "./board"
 class Bingo
   def initialize(file_name)
     lines = File.readlines(file_name, chomp: true)
-    # Remove blank lines
-    lines = lines.filter { |bl| !bl.empty? }
+    # Remove blank lines, and remove leading/trailing whitespace.
+    lines = lines.filter { |bl| !bl.empty? }.map &:strip
     # `lines` is an array of strings, e.g. ["22 13 17 11  0",...," 2  0 12  3  7"]
     # The int values are separated by commas or whitespace. Split up the int values
     # into arrays, and convert them to ints: [ [22, 13, 17, 11, 0],...]
@@ -56,7 +56,6 @@ class Bingo
     # Slice `lines` into board-sized subarrays. Each
     # subarray has the numbers for one board.
     slices = lines.each_slice(Board::BOARD_LINES)
-    boards = slices.map { |subarray| Board.new(subarray) }
-    boards
+    slices.map { |subarray| Board.new(subarray) }
   end
 end
